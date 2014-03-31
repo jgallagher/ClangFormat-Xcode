@@ -120,10 +120,13 @@
 
   DVTSourceTextStorage *textStorage = [document textStorage];
 
+  NSRange originSelectedRange = [[TRVSXcode textView] selectedRange];
+
   NSArray *lineRanges =
       [self lineRangesOfCharacterRanges:ranges usingTextStorage:textStorage];
   NSArray *continuousLineRanges =
       [self continuousLineRangesOfRanges:lineRanges];
+
   [self
       fragmentsOfContinuousLineRanges:continuousLineRanges
                      usingTextStorage:textStorage
@@ -148,6 +151,9 @@
                                       [alert runModal];
                                     }
                                 }];
+
+  [[TRVSXcode textView] setSelectedRange:originSelectedRange];
+  [[TRVSXcode textView] centerSelectionInVisibleArea:nil];
 }
 
 - (NSArray *)
